@@ -7,12 +7,14 @@ from .serializers import RegistrationSerializer
 class RegistrationView(APIView):
     """
     Docstring for RegistrationView
-    
+
     """
     # Required for image uploads
     parser_classes = (MultiPartParser, FormParser)
 
     def post(self, request):
+        print("POST")
+        print(f"request.data: {request.data}") # print the request.data)
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

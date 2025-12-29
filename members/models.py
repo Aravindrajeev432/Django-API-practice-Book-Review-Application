@@ -16,14 +16,19 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=100, choices=GenderChoice, default='Prefer not to say')
     country = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
-    profile_image = models.CharField(max_length=100, blank=True, null=True, default='default_profile.png')
+    profile_image = models.ImageField(
+        upload_to='profile_pics/', 
+        null=True, 
+        blank=True, 
+        default='default_profile.png'
+    )
     date_joined = models.DateTimeField(auto_now_add=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['phone_number', 'email', ]
+    REQUIRED_FIELDS = [ 'email']
 
     objects = CustomUserManager()
 
